@@ -1,4 +1,3 @@
-baseURL = 'https://kazcomy.github.io/'
 languageCode = 'ja'
 title = 'kazcomy'
 enableRobotsTXT = true
