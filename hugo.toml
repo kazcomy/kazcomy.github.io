@@ -1,0 +1,12 @@
+baseURL = '/'
+languageCode = 'ja'
+title = 'kazcomy'
+enableRobotsTXT = true
+theme = "PaperMod"
+
+[taxonomies]
+    tag = 'tags'
+
+[params]
+    ShowReadingTime = true
+    ShowCodeCopyButtons = true
