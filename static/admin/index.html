@@ -3,18 +3,35 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Content Manager (Debug)</title>
+  <title>Content Manager</title>
 </head>
 <body>
   <script>
     window.addEventListener("message", (event) => {
-      // Workerからメッセージが来たらアラートを出す
-      if (typeof event.data === "string" && event.data.startsWith("authorization:github")) {
-        alert("【受信成功】Workerからメッセージが届きました:\n" + event.data);
-        console.log("Received Auth Message:", event.data);
+      // Workerからの正しいメッセージであることを確認
+      if (typeof event.data === "string" && event.data.startsWith("authorization:github:success:")) {
+        // CMSが無視しているので、ここで強制的にトークンを保存する
+        try {
+          const jsonStr = event.data.replace("authorization:github:success:", "");
+          const data = JSON.parse(jsonStr);
+          
+          if (data.token) {
+            // Decap CMSの仕様に従い、LocalStorageにトークンを配置
+            localStorage.setItem("netlify-cms-user", JSON.stringify({
+              token: data.token,
+              backendName: "github"
+            }));
+            
+            // 画面をリロードして、保存したトークンをCMSに読み込ませる
+            window.location.reload();
+          }
+        } catch (e) {
+          console.error("Auth Error:", e);
+        }
       }
     });
   </script>
+
   <script src="./decap-cms.js"></script>
 </body>
 </html>
