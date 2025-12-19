@@ -5,4 +5,4 @@ tags: ["init"]
 draft: false
 ---
 
-### Hello, World
+### Hello World
