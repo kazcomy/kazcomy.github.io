@@ -6,37 +6,6 @@
   <title>Content Manager</title>
 </head>
 <body>
-  <script>
-    window.addEventListener("message", (event) => {
-      // 1. Workerからの成功メッセージを捕まえる
-      if (typeof event.data === "string" && event.data.startsWith("authorization:github:success:")) {
-        console.log("【パッチ作動】有効なトークンを検知しました。強制適用します。");
-
-        try {
-          // 2. メッセージからトークンを取り出す
-          const jsonStr = event.data.replace("authorization:github:success:", "");
-          const data = JSON.parse(jsonStr);
-
-          if (data.token) {
-            // 3. CMSの保存領域(LocalStorage)にトークンを直接ねじ込む
-            localStorage.setItem("netlify-cms-user", JSON.stringify({
-              token: data.token,
-              backendName: "github"
-            }));
-            
-            // 4. 念のため確認アラート（動作確認用、邪魔なら消してOK）
-            // alert("認証成功！ログインします。");
-
-            // 5. 画面をリロードして、CMSに「ログイン済み」と認識させる
-            window.location.reload();
-          }
-        } catch (e) {
-          console.error("パッチ処理エラー:", e);
-        }
-      }
-    });
-  </script>
-
   <script src="./decap-cms.js"></script>
 </body>
 </html>
