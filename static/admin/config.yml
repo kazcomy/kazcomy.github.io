@@ -1,0 +1,25 @@
+backend:
+  name: github
+  repo: kazcomy/kazcomy.github.io
+  branch: main
+  base_url: https://decap-oauth-proxy.kazcomy1012.workers.dev
+  auth_endpoint: auth
+
+publish_mode: editorial_workflow
+media_folder: "content/posts/_media"
+public_folder: "/posts/_media"
+
+collections:
+  - name: "posts"
+    label: "Posts"
+    folder: "content/posts"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "yaml-frontmatter"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Tags", name: "tags", widget: "list", default: [] }
+      - { label: "Draft", name: "draft", widget: "boolean", default: true }
+      - { label: "Body", name: "body", widget: "markdown" }
