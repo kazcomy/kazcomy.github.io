@@ -5,7 +5,7 @@ backend:
   base_url: https://decap-oauth-proxy.kazcomy1012.workers.dev
   auth_endpoint: auth
 
-publish_mode: editorial_workflow
+#publish_mode: editorial_workflow
 media_folder: "content/posts/_media"
 public_folder: "/posts/_media"
 
