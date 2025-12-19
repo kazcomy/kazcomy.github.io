@@ -2,11 +2,27 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Admin</title>
+    <title>Content Manager</title>
+    <style>
+      /* ロード中の画面崩れを防ぐ */
+      body { margin: 0; height: 100vh; }
+    </style>
   </head>
   <body>
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.1.2/dist/decap-cms.js"></script>
+    
+    <script>
+      // ページ読み込み完了時にCMSが起動しているかチェック
+      window.onload = function() {
+        if (!window.CMS) {
+          console.error("CMS library failed to load.");
+          document.body.innerHTML = "<h1>Error: CMS failed to load</h1>";
+        } else {
+          console.log("CMS Loaded. Waiting for login...");
+        }
+      };
+    </script>
   </body>
 </html>
