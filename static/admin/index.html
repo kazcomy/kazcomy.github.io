@@ -9,6 +9,10 @@
   </style>
 </head>
 <body>
+  <script>
+    window.CMS_MANUAL_INIT = true;
+  </script>
+
   <script src="./decap-cms.js"></script>
 
   <script>
@@ -43,8 +47,10 @@
       ]
     };
 
+    // ここで初めてCMSを起動
     CMS.init({ config: config });
-    console.log("CMS Initialized Locally");
+    
+    console.log("CMS Initialized Manually (Conflict Resolved)");
   </script>
 </body>
 </html>
