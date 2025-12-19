@@ -3,9 +3,41 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Content Manager</title>
+  <title>Content Manager (Debug)</title>
 </head>
 <body>
+  <script>
+    // CMSがエラーで勝手にリロードするのを全力で阻止します
+    window.onbeforeunload = function() {
+      // これを返すことで、ブラウザが「移動していいですか？」と一時停止します
+      return "【デバッグモード】エラーを確認するためリロードを停止しました。コンソールを見てください。";
+    };
+
+    // Workerからのメッセージ受信＆強制ログインパッチ
+    window.addEventListener("message", (event) => {
+      if (typeof event.data === "string" && event.data.startsWith("authorization:github:success:")) {
+        console.log("【パッチ】トークン受信。保存して起動を試みます...");
+        try {
+          const jsonStr = event.data.replace("authorization:github:success:", "");
+          const data = JSON.parse(jsonStr);
+          if (data.token) {
+            localStorage.setItem("netlify-cms-user", JSON.stringify({
+              token: data.token,
+              backendName: "github"
+            }));
+            console.log("【パッチ】保存完了。CMSが起動するのを待ちます...");
+            
+            // リロードの代わりに、ここでページを再読み込みせずCMSに通知できればベストですが、
+            // Decap CMSの仕様上リロードが必要なため、手動でリロードボタンを押してもらう形にします
+            if (confirm("トークンを保存しました。OKを押すとリロードしてCMSを起動します。\n(次の画面でエラーが出たら、リロードをキャンセルしてください)")) {
+               window.location.reload();
+            }
+          }
+        } catch (e) { console.error(e); }
+      }
+    });
+  </script>
+
   <script src="./decap-cms.js"></script>
 </body>
 </html>
