@@ -3,7 +3,7 @@ backend:
   repo: kazcomy/kazcomy.github.io
   branch: main
   base_url: https://decap-oauth-proxy.kazcomy1012.workers.dev
-  auth_endpoint: /auth
+  auth_endpoint: auth
 
 publish_mode: editorial_workflow
 

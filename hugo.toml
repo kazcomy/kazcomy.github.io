@@ -1,6 +1,6 @@
 baseURL = 'https://kazcomy.github.io/'
 languageCode = 'ja'
-title = 'kazcomy'
+title = 'kazcomyの備忘録'
 enableRobotsTXT = true
 theme = "PaperMod"
 
