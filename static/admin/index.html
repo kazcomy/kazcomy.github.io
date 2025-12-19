@@ -3,9 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Content Manager</title>
+  <title>Content Manager (Debug)</title>
 </head>
 <body>
+  <script>
+    window.addEventListener("message", (event) => {
+      // Workerからメッセージが来たらアラートを出す
+      if (typeof event.data === "string" && event.data.startsWith("authorization:github")) {
+        alert("【受信成功】Workerからメッセージが届きました:\n" + event.data);
+        console.log("Received Auth Message:", event.data);
+      }
+    });
+  </script>
   <script src="./decap-cms.js"></script>
 </body>
 </html>
