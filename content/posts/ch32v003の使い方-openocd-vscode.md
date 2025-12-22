@@ -75,3 +75,23 @@ install
    25  ls \~
 
    26  history
+
+   34  cd .platformio/
+
+   35  ls
+
+   36  cd penv/
+
+   37  ls
+
+   38  cd bin
+
+   39  ls
+
+   40  pio
+
+   41  ./pio
+
+   42  pio pkg install --global --tool "community-ch32v/tool-openocd-riscv-wch@^2.1100.240729"
+
+   43  ./pio pkg install --global --tool "community-ch32v/tool-openocd-riscv-wch@^2.1100.240729"
