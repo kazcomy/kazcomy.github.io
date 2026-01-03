@@ -25,7 +25,7 @@ jobs:
         with:
           hugo-version: "latest"
 
-      - run: hugo --minify
+      - run: hugo --minify --buildFuture
 
       - uses: actions/upload-pages-artifact@v3
         with:
